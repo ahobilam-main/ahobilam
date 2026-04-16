@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenders Portal | Sri Ahobila Lakshmi Narasimha Swamy Devasthanam</title>
+    <link rel="icon" type="image/png" href="https://ahobilam-main.github.io/Images/fevicon%20icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #fff; color: #1a1a1a; margin: 0; padding: 0; font-family: 'Roboto Slab', serif; font-size: 0.95rem; }
+        .header-bg { background-color: #fdf2f2; }
+        .text-maroon { color: #800000; }
+        .img-shadow { filter: drop-shadow(0 2px 4px rgba(128, 0, 0, 0.1)); }
+        .icon-maroon { fill: #800000; }
+        .flip-horizontal { transform: scaleX(-1); }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: none; align-items: center; justify-content: center; backdrop-blur: 4px; }
+        .hd-title { text-shadow: 1px 1px 2px rgba(0,0,0,0.1); letter-spacing: 0.01em; }
+        marquee { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- USER INFO MODAL -->
+    <div id="user-info-modal" class="modal">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 border-t-4 border-red-900">
+            <h3 class="text-lg font-bold text-red-900 mb-3 uppercase text-center">Enter Details</h3>
+            <div class="space-y-3">
+                <input type="text" id="user-name" class="w-full border border-zinc-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-red-900" placeholder="Full Name">
+                <input type="number" id="user-phone" class="w-full border border-zinc-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-red-900" placeholder="Mobile Number">
+                <button onclick="processDownload()" class="w-full bg-red-900 text-white font-bold py-2.5 rounded-lg uppercase text-xs tracking-widest hover:bg-red-800 transition">Generate & Download</button>
+            </div>
+            <button onclick="closeModal('user-info-modal')" class="w-full mt-3 text-[9px] text-zinc-400 font-bold uppercase">Cancel</button>
+        </div>
+    </div>
+
+    <!-- DOCUMENT VIEW MODAL -->
+    <div id="doc-view-modal" class="modal overflow-y-auto">
+        <div class="bg-white p-4 my-6 rounded-lg shadow-2xl max-w-2xl w-full mx-4">
+            <div id="printable-area" class="border-4 border-double border-red-900 p-6">
+                <div class="text-center mb-4">
+                    <img src="https://ahobilam-main.github.io/Images//cropped_circle_image.png" class="w-12 h-12 mx-auto mb-2">
+                    <h2 class="text-base font-bold text-red-900 uppercase">Sri Ahobila Lakshmi Narasimha Swamy Devasthanam</h2>
+                    <p class="text-[9px] uppercase text-zinc-500 font-bold">Tender Application Receipt</p>
+                </div>
+                <div class="border-y border-zinc-200 py-3 my-3 space-y-2 text-[10px] uppercase font-bold">
+                    <div class="flex justify-between"><span>Tender ID:</span> <span id="display-id" class="text-red-900">---</span></div>
+                    <div class="flex justify-between"><span>Applicant:</span> <span id="display-name">---</span></div>
+                    <div class="flex justify-between"><span>Contact:</span> <span id="display-phone">---</span></div>
+                </div>
+                <div class="text-[9px] text-zinc-700 leading-relaxed"><p>Acknowledgment for tender documents (Notice No: AHB/TND/2024/042).</p></div>
+            </div>
+            <div class="mt-4 flex gap-2">
+                <button onclick="window.print()" class="flex-1 bg-zinc-800 text-white py-2 rounded-lg font-bold uppercase text-[9px]">Print</button>
+                <button onclick="closeModal('doc-view-modal')" class="flex-1 bg-red-900 text-white py-2 rounded-lg font-bold uppercase text-[9px]">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REPLACED HEADER SECTION -->
+    <header class="header-bg py-2 px-4 md:px-8 shadow-sm border-b-2 border-yellow-600 w-full">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
+            <div class="hidden md:block flex-1"></div>
+            <div class="flex flex-col items-center text-center flex-[2] order-2">
+                <img src="https://ahobilam-main.github.io/Images/header%20main%20logo.png" alt="Main Logo" class="h-10 md:h-14 w-auto mb-1 img-shadow" onerror="this.style.display='none'">
+                <div class="space-y-0.5 text-maroon">
+                    <h2 class="text-[9px] md:text-xs font-semibold uppercase tracking-widest opacity-80">Sri Ahobila Mutt Paramparadheena</h2>
+                    <h1 class="text-base md:text-xl lg:text-2xl font-bold leading-tight">Sri Lakshmi Narasimha Swamy Devastanam</h1>
+                    <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-0 text-[10px] md:text-sm font-medium">
+                        <span class="italic text-opacity-90">Ahobilam, Allagadda mandal Nandyal District, AP- 518543.</span>
+                        <span class="flex items-center gap-1">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 icon-maroon" viewBox="0 0 24 24">
+                                <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
+                            </svg>
+                            9440120878
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-shrink-0 order-3 flex-1 flex justify-center md:justify-end">
+                <img src="https://ahobilam-main.github.io/Images/head-removebg-preview.png" alt="Right Logo" class="h-24 md:h-32 lg:h-36 w-auto img-shadow flip-horizontal" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </header>
+
+    <!-- SCROLLING NOTIFICATION BAR -->
+    <div class="w-full bg-yellow-100 text-red-900 py-1.5 border-b border-yellow-600/10">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            KINDLY NOTE: This is the official portal for tenders. If you require any assistance, please contact us for better service.
+        </marquee>
+    </div>
+
+    <!-- NOTICE DATE BAR -->
+    <div class="w-full bg-zinc-50 text-red-900 py-2.5 border-b border-zinc-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="flex h-1.5 w-1.5 rounded-full bg-red-600 animate-ping"></span>
+                <span class="text-[10px] md:text-xs font-semibold uppercase tracking-wider">Notice - May 15, 2024</span>
+            </div>
+            <div class="flex items-center gap-3 text-[9px] font-bold uppercase">
+                <button onclick="changeLang('en')" class="hover:text-red-600 transition">English</button>
+                <button onclick="changeLang('te')" class="hover:text-red-600 transition">తెలుగు</button>
+                <button onclick="changeLang('hi')" class="hover:text-red-600 transition">हिन्दी</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen bg-white pt-4 pb-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="border-2 border-red-900 p-5 md:p-8 rounded-lg shadow-lg relative overflow-hidden bg-zinc-50/30">
+                <div class="absolute top-0 right-0 bg-red-900 text-white px-3 py-1 text-[8px] font-bold uppercase tracking-widest">Active Tender</div>
+                <div class="text-center mb-6">
+                    <h2 class="text-red-900 text-xl md:text-2xl font-bold uppercase border-b-2 border-red-900 inline-block pb-1 mb-2">Tender Advertisement</h2>
+                    <p class="text-[9px] text-zinc-500 uppercase font-bold tracking-widest">Notice No: AHB/TND/2024/042</p>
+                </div>
+                <div class="space-y-5 text-xs leading-relaxed text-zinc-800">
+                    <p class="font-bold text-base text-center mb-4">Subject: Auction of Collection and Disposal Rights of Human Hair (Kalyana Katta) for the year 2024-25.</p>
+                    <div class="grid md:grid-cols-2 gap-6 py-4 border-y border-zinc-200">
+                        <div>
+                            <h4 class="font-bold text-red-800 uppercase text-[10px] mb-2">Tender Details</h4>
+                            <ul class="space-y-2 text-[10px]">
+                                <li><strong>Location:</strong> Main Temple & Lower Ahobilam</li>
+                                <li><strong>Duration:</strong> 12 Months (Annual Contract)</li>
+                                <li><strong>EMD Amount:</strong> ₹ 5,00,000/-</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-red-800 uppercase text-[10px] mb-2">Important Dates</h4>
+                            <ul class="space-y-2 text-[10px]">
+                                <li><strong>Start Date:</strong> May 15, 2024</li>
+                                <li><strong>End Date:</strong> June 05, 2024</li>
+                                <li><strong>Auction Date:</strong> June 10, 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+                        <button onclick="openInputModal('tender')" class="flex items-center justify-center gap-2 bg-red-900 text-white px-5 py-3.5 rounded-lg hover:bg-red-800 transition shadow-md group w-full sm:w-auto">
+                            <i data-lucide="download-cloud" class="w-4 h-4"></i>
+                            <div class="text-left leading-tight"><span class="block text-[7px] uppercase opacity-70 font-bold">Tender Document</span><span class="block text-[10px] font-bold uppercase tracking-wide">Complete Details</span></div>
+                        </button>
+                        <button onclick="openInputModal('form')" class="flex items-center justify-center gap-2 bg-zinc-800 text-white px-5 py-3.5 rounded-lg hover:bg-zinc-700 transition shadow-md group w-full sm:w-auto">
+                            <i data-lucide="file-check" class="w-4 h-4"></i>
+                            <div class="text-left leading-tight"><span class="block text-[7px] uppercase opacity-70 font-bold">Application Form</span><span class="block text-[10px] font-bold uppercase tracking-wide">Schedule Form</span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- UPDATED FOOTER SECTION -->
+    <footer class="header-bg text-maroon pt-10 pb-6 border-t-2 border-yellow-600">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-8">
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold uppercase border-b border-yellow-600/30 inline-block pb-1">Support Desk</h3>
+                    <div class="space-y-3 text-[10px] font-medium">
+                        <div class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5"></i><p>+91 08519 252042</p></div>
+                        <div class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5"></i><p>info@ahobilamdevasthanam.org</p></div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold uppercase border-b border-yellow-600/30 inline-block pb-1">Quick Access</h3>
+                    <ul class="space-y-3 text-[10px] font-medium uppercase tracking-tight">
+                        <li><a href="#" class="flex items-center gap-2 hover:opacity-70 transition"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="flex items-center gap-2 hover:opacity-70 transition"><i data-lucide="file-text" class="w-3.5 h-3.5"></i> Terms & Conditions</a></li>
+                        <li><a href="#" class="flex items-center gap-2 hover:opacity-70 transition"><i data-lucide="help-circle" class="w-3.5 h-3.5"></i> FAQ / Help</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold uppercase border-b border-yellow-600/30 inline-block pb-1">Office Address</h3>
+                    <div class="flex items-start gap-2 text-[10px] font-medium leading-relaxed uppercase">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5"></i>
+                        <p class="opacity-90">Sri Ahobila Lakshmi Narasimha Swamy Devasthanam, Ahobilam, Nandyal (Dist), AP - 518543</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-6 border-t border-maroon/10">
+                <p class="text-[9px] opacity-60 uppercase text-left font-medium">© 2024 Sri Ahobila Lakshmi Narasimha Swamy Devasthanam. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeLang(l) { console.log("Language requested: " + l); }
+        function openInputModal(t) { document.getElementById('user-info-modal').style.display='flex'; }
+        function closeModal(i) { document.getElementById(i).style.display='none'; }
+        function processDownload() {
+            const n=document.getElementById('user-name').value;
+            const p=document.getElementById('user-phone').value;
+            if(!n || !p) { alert('Enter details'); return; }
+            const tid=`AHB426${n.substring(0,2).toUpperCase()}${p.slice(-2)}001`;
+            document.getElementById('display-id').textContent=tid;
+            document.getElementById('display-name').textContent=n;
+            document.getElementById('display-phone').textContent=p;
+            closeModal('user-info-modal');
+            document.getElementById('doc-view-modal').style.display='flex';
+        }
+        window.onload=function() { lucide.createIcons(); }
+    </script>
+</body>
+</html>
