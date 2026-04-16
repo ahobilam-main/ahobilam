@@ -14,68 +14,32 @@
         .font-temple { font-family: 'Roboto Slab', serif; }
         .text-maroon { color: #800000; }
         .bg-maroon { background-color: #800000; }
-        .text-gold { color: #d97706; }
         .img-shadow { filter: drop-shadow(0 2px 4px rgba(128, 0, 0, 0.1)); }
         .flip-horizontal { transform: scaleX(-1); }
-        
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .animate-scroll {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scrollText 30s linear infinite;
-        }
-
+        @keyframes scrollText { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-scroll { display: inline-block; white-space: nowrap; animation: scrollText 35s linear infinite; }
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
         #loading-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.95); z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        
         .logo-loader { width: 80px; height: 80px; border: 3px solid #f3f3f3; border-top: 3px solid #800000; border-radius: 50%; animation: spin 1s linear infinite; position: relative; display: flex; align-items: center; justify-content: center; }
         .loader-icon { width: 50px; height: 50px; border-radius: 50%; position: absolute; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-y: auto; }
-
-        #doc-view-modal .modal-content { max-height: 95vh; width: 95%; max-width: 850px; background: white; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-        #printable-area { background: white; width: 100%; color: black; line-height: 1.4; flex-grow: 1; }
-        .doc-body { padding: 30px; font-size: 12px; text-align: justify; font-family: 'Times New Roman', serif; }
-        .form-line { border-bottom: 1px solid #000; display: inline-block; min-width: 120px; height: 16px; flex-grow: 1; margin-left: 5px; }
-        .checkbox-custom { width: 13px; height: 13px; border: 1px solid black; display: inline-block; margin-right: 4px; vertical-align: middle; }
-
         body { display: flex; flex-direction: column; min-height: 100vh; background-color: #f9fafb; }
         main { flex-grow: 1; }
-
-        @media print {
-            body { background: white !important; }
-            .no-print { display: none !important; }
-            .modal { position: absolute !important; display: block !important; background: white !important; }
-            .modal-content { max-height: none !important; width: 100% !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
-            #printable-area { width: 100% !important; height: auto !important; overflow: visible !important; }
-            .doc-body { padding: 0.5cm 1cm !important; font-size: 11pt !important; }
-        }
-
         #download-notif { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 10px 20px; font-weight: bold; z-index: 300; display: none; border-radius: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-size: 12px; }
     </style>
 </head>
 <body class="font-temple antialiased">
 
-    <!-- DOWNLOAD NOTIFICATION -->
     <div id="download-notif" class="flex items-center gap-2">
-        <i data-lucide="check-circle" class="w-4 h-4"></i> Document Downloaded Successfully!
+        <i data-lucide="check-circle" class="w-4 h-4"></i> Download Started Successfully!
     </div>
 
-    <!-- LOADING OVERLAY -->
     <div id="loading-overlay">
-        <div class="logo-loader">
-            <img src="https://ahobilam-main.github.io/Images/fevicon%20icon.png" class="loader-icon">
-        </div>
-        <p class="mt-4 text-[#800000] font-bold uppercase tracking-widest text-[9px] animate-pulse">Connecting to Secure Server...</p>
+        <div class="logo-loader"><img src="https://ahobilam-main.github.io/Images/fevicon%20icon.png" class="loader-icon"></div>
+        <p class="mt-4 text-[#800000] font-bold uppercase tracking-widest text-[9px] animate-pulse">Processing Your Request...</p>
     </div>
 
-    <!-- HEADER SECTION -->
-    <header class="header-bg py-1 px-4 md:px-8 shadow-sm border-b border-yellow-600 w-full no-print">
+    <header class="header-bg py-1 px-4 md:px-8 shadow-sm border-b border-yellow-600 w-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-1 md:gap-4">
             <div class="hidden md:block flex-1"></div>
             <div class="flex flex-col items-center text-center flex-[2] order-2">
@@ -93,19 +57,17 @@
         </div>
     </header>
 
-    <!-- TICKER -->
-    <div class="bg-maroon text-white py-1.5 border-b border-yellow-500 overflow-hidden no-print">
+    <div class="bg-maroon text-white py-1.5 border-b border-yellow-500 overflow-hidden">
         <div class="animate-scroll text-[10px] md:text-xs font-medium">
             Kindly Note: This is the official portal for Ahobilam tenders. For any assistance or support, please feel free to contact us for better service. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kindly Note: This is the official portal for Ahobilam tenders. For any assistance or support, please feel free to contact us for better service.
         </div>
     </div>
 
-    <!-- NOTICE BAR -->
-    <div class="mt-3 px-4 md:px-8 no-print">
+    <div class="mt-3 px-4 md:px-8">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between bg-white border-l-4 border-yellow-600 p-2 md:p-3 shadow-sm rounded-r-md">
             <div class="flex items-center gap-2 mb-1 md:mb-0">
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
-                <p class="text-maroon font-bold text-xs md:text-sm">Notice - April 01, 2026</p>
+                <p class="text-maroon font-bold text-xs md:text-sm">Notice - May 15, 2024</p>
             </div>
             <div class="flex items-center gap-3 text-[10px] md:text-xs font-semibold">
                 <span class="text-gray-400">Available in:</span>
@@ -118,25 +80,19 @@
         </div>
     </div>
 
-    <!-- DASHBOARD -->
-    <main class="w-full max-w-5xl mx-auto py-6 px-4 no-print">
+    <main class="w-full max-w-5xl mx-auto py-6 px-4">
         <div class="border border-[#800000] p-6 md:p-8 rounded-lg shadow-xl relative bg-white overflow-hidden">
             <div class="absolute top-0 right-0 bg-[#800000] text-white px-3 py-1 text-[8px] font-bold uppercase tracking-widest rounded-bl-lg">OPEN TENDER</div>
-            
             <div class="text-center mb-6">
                 <h2 class="text-[#800000] text-xl md:text-2xl font-bold uppercase underline decoration-1 underline-offset-4">Tender Advertisement</h2>
                 <p class="text-[9px] text-zinc-500 font-bold uppercase mt-2">NOTICE NO: AHB/TND/2026/001</p>
             </div>
-
             <div class="text-center mb-6 px-2 border-b border-zinc-50 pb-4">
                 <p class="text-zinc-900 font-bold text-sm md:text-base leading-snug">Subject: Auction of Collection and Disposal Rights of Human Hair (Kalyana Katta) for the year 2026-27.</p>
             </div>
-
             <div class="grid md:grid-cols-2 gap-6 mb-8">
                 <div class="space-y-3 bg-zinc-50 p-4 rounded-lg">
-                    <div class="flex items-center gap-2 text-[#800000] font-bold text-xs uppercase border-b border-zinc-200 pb-1">
-                        <i data-lucide="info" class="w-4 h-4"></i> Tender Details
-                    </div>
+                    <div class="flex items-center gap-2 text-[#800000] font-bold text-xs uppercase border-b border-zinc-200 pb-1"><i data-lucide="info" class="w-4 h-4"></i> Tender Details</div>
                     <ul class="space-y-2 text-[11px] md:text-xs">
                         <li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-zinc-400 mt-0.5"></i> <span><strong>Location:</strong> Main Temple & Lower Ahobilam</span></li>
                         <li class="flex items-start gap-2"><i data-lucide="calendar-check" class="w-3.5 h-3.5 text-zinc-400 mt-0.5"></i> <span><strong>Duration:</strong> 12 Months (Annual Contract)</span></li>
@@ -144,9 +100,7 @@
                     </ul>
                 </div>
                 <div class="space-y-3 bg-zinc-50 p-4 rounded-lg">
-                    <div class="flex items-center gap-2 text-[#800000] font-bold text-xs uppercase border-b border-zinc-200 pb-1">
-                        <i data-lucide="calendar" class="w-4 h-4"></i> Important Dates
-                    </div>
+                    <div class="flex items-center gap-2 text-[#800000] font-bold text-xs uppercase border-b border-zinc-200 pb-1"><i data-lucide="calendar" class="w-4 h-4"></i> Important Dates</div>
                     <ul class="space-y-2 text-[11px] md:text-xs">
                         <li class="flex items-start gap-2"><i data-lucide="calendar-days" class="w-3.5 h-3.5 text-zinc-400 mt-0.5"></i> <span><strong>Auction Date:</strong> April 27, 2026</span></li>
                         <li class="flex items-start gap-2"><i data-lucide="clock" class="w-3.5 h-3.5 text-zinc-400 mt-0.5"></i> <span><strong>Time:</strong> 03:00 PM</span></li>
@@ -154,320 +108,118 @@
                     </ul>
                 </div>
             </div>
-
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button id="btn-doc" onclick="openVerification('notice')" class="group bg-[#800000] text-white px-6 py-3.5 rounded-lg hover:bg-black transition-all shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
-                    <i data-lucide="file-text" class="w-5 h-5"></i>
-                    <span class="font-bold uppercase tracking-wider text-[11px]">Download Document</span>
+                <button id="btn-doc" onclick="openVerification('notice')" class="bg-[#800000] text-white px-6 py-3.5 rounded-lg hover:bg-black transition-all shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <i data-lucide="file-text" class="w-5 h-5"></i><span class="font-bold uppercase tracking-wider text-[11px]">Download Document</span>
                 </button>
-                <button id="btn-app" onclick="openVerification('form')" class="group bg-zinc-800 text-white px-6 py-3.5 rounded-lg hover:bg-black transition-all shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
-                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
-                    <span class="font-bold uppercase tracking-wider text-[11px]">Download Application</span>
+                <button id="btn-app" onclick="openVerification('form')" class="bg-zinc-800 text-white px-6 py-3.5 rounded-lg hover:bg-black transition-all shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <i data-lucide="clipboard-list" class="w-5 h-5"></i><span class="font-bold uppercase tracking-wider text-[11px]">Download Application</span>
                 </button>
             </div>
         </div>
     </main>
 
-    <!-- VERIFICATION MODAL -->
-    <div id="user-info-modal" class="modal no-print">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 border-t-4 border-[#800000]">
+    <div id="user-info-modal" class="modal">
+        <div id="auth-form" class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 border-t-4 border-[#800000]">
             <h3 class="text-base font-bold text-zinc-800 uppercase text-center mb-4">Verification Required</h3>
             <div class="space-y-3">
-                <div class="relative">
-                    <i data-lucide="user" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400"></i>
-                    <input type="text" id="user-name" class="w-full border border-zinc-200 rounded-lg pl-9 pr-3 py-2 text-xs outline-none focus:ring-1 focus:ring-[#800000]" placeholder="Enter Full Name">
-                </div>
-                <div class="relative">
-                    <i data-lucide="phone" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400"></i>
-                    <input type="number" id="user-phone" class="w-full border border-zinc-200 rounded-lg pl-9 pr-3 py-2 text-xs outline-none focus:ring-1 focus:ring-[#800000]" placeholder="10 Digit Mobile Number">
-                </div>
-                <button onclick="processSecureGen()" class="w-full bg-[#800000] text-white font-bold py-3 rounded-lg uppercase text-[10px] tracking-widest hover:bg-black transition shadow-sm">Generate Secure Access</button>
+                <div class="relative"><i data-lucide="user" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400"></i><input type="text" id="user-name" class="w-full border border-zinc-200 rounded-lg pl-9 pr-3 py-2 text-xs outline-none focus:ring-1 focus:ring-[#800000]" placeholder="Enter Full Name"></div>
+                <div class="relative"><i data-lucide="phone" class="absolute left-3 top-2.5 w-3.5 h-3.5 text-zinc-400"></i><input type="number" id="user-phone" class="w-full border border-zinc-200 rounded-lg pl-9 pr-3 py-2 text-xs outline-none focus:ring-1 focus:ring-[#800000]" placeholder="10 Digit Mobile Number"></div>
+                <button onclick="processSecureGen()" class="w-full bg-[#800000] text-white font-bold py-3 rounded-lg uppercase text-[10px] tracking-widest hover:bg-black transition shadow-sm">Verify and Continue</button>
             </div>
             <button onclick="closeModal('user-info-modal')" class="w-full mt-3 text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Cancel</button>
         </div>
-    </div>
-
-    <!-- DOCUMENT VIEW MODAL -->
-    <div id="doc-view-modal" class="modal">
-        <div class="modal-content shadow-2xl flex flex-col">
-            <div id="printable-area" class="no-scrollbar">
-                <div class="header-bg py-4 px-8 border-b-2 border-yellow-600 flex flex-col md:flex-row items-center justify-between gap-2">
-                    <div class="hidden md:block flex-1"></div>
-                    <div class="flex flex-col items-center text-center flex-[2] text-maroon">
-                        <img src="https://ahobilam-main.github.io/Images/header%20main%20logo.png" class="h-8 w-auto mb-1">
-                        <h2 class="text-[8px] font-bold uppercase tracking-tighter">SRI AHOBILA MUTT PARAMPARA ADHEENA</h2>
-                        <h1 class="text-base font-bold leading-tight uppercase text-center">SRI LAKSHMI NARASIMHA SWAMY DEVASTHANAM</h1>
-                        <p class="text-[9px] italic font-semibold">Ahobilam, Nandyal District, AP- 518543.</p>
-                    </div>
-                    <div class="flex-shrink-0 flex-1 flex justify-center md:justify-end">
-                        <img src="https://ahobilam-main.github.io/Images/head-removebg-preview.png" class="h-20 w-auto transform scale-x-[-1]">
-                    </div>
-                </div>
-
-                <div class="bg-zinc-50 border-b border-zinc-200 px-8 py-3 grid grid-cols-1 md:grid-cols-3 gap-2 text-[9px] font-bold uppercase text-zinc-700">
-                    <div class="flex items-center gap-2"><i data-lucide="user" class="w-3 h-3 text-maroon"></i> Name: <span id="doc-name" class="text-black ml-1"></span></div>
-                    <div class="flex items-center gap-2"><i data-lucide="phone" class="w-3 h-3 text-maroon"></i> Phone: <span id="doc-phone" class="text-black ml-1"></span></div>
-                    <div class="flex items-center gap-2 text-maroon"><i data-lucide="hash" class="w-3 h-3"></i> Tender ID: <span id="doc-id" class="ml-1"></span></div>
-                </div>
-
-                <div class="doc-body">
-                    <!-- CONTENT 1: TENDER NOTICE -->
-                    <div id="content-notice" class="hidden">
-                        <div class="text-center mb-6">
-                            <h3 class="font-bold text-xs uppercase">SRI AHOBILA MUTT PARAMPARA ADHEENA</h3>
-                            <h3 class="font-bold text-xs uppercase underline">SRI LAKSHMI NARASIMHA SWAMY DEVASTHANAM (SAM-SLNSD)</h3>
-                            <p class="text-[10px]">[Ahobilam / Office Address]</p>
-                            <h2 class="font-bold text-base mt-4 underline uppercase">TENDER / AUCTION NOTICE</h2>
-                            <p class="font-bold text-xs mt-1">Disposal Rights of Human Hair Offerings – Annual Contract (2026–27)</p>
-                        </div>
-                        <p class="mb-4">Applications for the tender are invited from eligible and qualified bidders for grant of rights for collection, processing, and disposal of human hair offerings of SAM-SLNSD for the ensuing period, through a public auction / tender process.</p>
-                        <div class="space-y-4">
-                            <div><strong>1. Date, Time & Venue</strong><br>• Date: 27th April 2026 | • Time: 3:00 PM | • Venue: Office of SAM-SLNSD, [Ahobilam]</div>
-                            <div><strong>2. Upset / Expected Value</strong><br>• Upset Price: Rs. 2,00,00,000/- (Rupees Two Crores only)</div>
-                            <div><strong>3. Eligibility for Participation</strong><br>Interested bidders shall submit, along with the application, complete documentary proof of: Registration (Company/Firm/Proprietorship), PAN/GST, Bank Solvency, Experience, and Authorized Signatory.</div>
-                            <div><strong>4. Earnest Money Deposit (EMD)</strong><br>• Amount: Rs.2,00,000 via DD/Cheque in favor of Srivan Satagopa Sri (A/C: 002010011001555).</div>
-                            <div><strong>5. Payment Terms</strong><br>• Remit not less than 75% upfront. Balance secured by PDCs/Guarantee. Defaults lead to blacklisting.</div>
-                            <div><strong>6. Contractual Safeguards</strong><br>• SAM-SLNSD reserves right to insist on enhanced security. Rights non-transferable.</div>
-                            <div><strong>7. Compliance</strong><br>• Bidders subject to verification. SAM-SLNSD reserves right to reject any bidder without assigning reasons.</div>
-                            <div><strong>12. Submission</strong><br>• Open tenders must be submitted before 12.00pm of 27-04-2026. Late submissions not entertained.</div>
-                            <div><strong>13. Opening of Tender</strong><br>• Accepted applications displayed by 2:00pm on 27-04-2026. Auction under camera coverage.</div>
-                        </div>
-                        <div class="mt-10 pt-6 border-t border-black flex justify-between items-end text-[10px] font-bold uppercase">
-                            <div>By Order of Hereditary Trustee to SAM-SLNSD<br>His Holiness 46th Peetathipathi of Sri Ahobila Mutt</div>
-                            <div class="text-right">S PARATHSARATHY<br>Chief Administrator /GPA<br>16th April 2026</div>
-                        </div>
-                    </div>
-
-                    <!-- CONTENT 2: APPLICATION FORM (IMPROVED ALIGNMENT) -->
-                    <div id="content-form" class="hidden">
-                        <div class="text-center mb-6">
-                            <h3 class="font-bold text-xs uppercase">SRI AHOBILA MUTT PARAMPARAADHEENA – SRI LAKSHMI NARASIMHA SWAMY DEVASTHANAM (SAM-SLNSD)</h3>
-                            <p class="text-[10px]">[Office Address – Ahobilam]</p>
-                            <h2 class="font-bold text-base mt-3 underline uppercase">APPLICATION FORM FOR PARTICIPATION IN TENDER / AUCTION</h2>
-                            <p class="font-bold text-xs">Human Hair Collection & Disposal Rights (2026–27)</p>
-                            <p class="text-[10px] font-bold">Auction Date: 27.04.2026 | Time: 3:00 PM</p>
-                        </div>
-                        
-                        <div class="space-y-4 text-[11px]">
-                            <div>
-                                <h4 class="font-bold border-b border-black pb-0.5 uppercase tracking-wide">1. Applicant Details</h4>
-                                <div class="mt-2 space-y-2">
-                                    <div class="flex items-baseline"><span>1. Name of the Entity:</span> <span class="form-line w-[400px]"></span></div>
-                                    <div class="flex items-center gap-3">
-                                        <span>2. Constitution (Tick):</span>
-                                        <div class="flex gap-2">
-                                            <span><div class="checkbox-custom"></div> Proprietorship</span>
-                                            <span><div class="checkbox-custom"></div> Partnership</span>
-                                            <span><div class="checkbox-custom"></div> Company</span>
-                                            <span><div class="checkbox-custom"></div> Others __________</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-baseline"><span>3. Registered Address:</span> <span class="form-line"></span></div>
-                                    <div class="flex items-baseline"><span>4. Operational Address:</span> <span class="form-line"></span></div>
-                                    <div class="flex flex-wrap gap-4 mt-1">
-                                        <div class="flex items-baseline"><span>Mobile:</span> <span class="form-line w-[100px]"></span></div>
-                                        <div class="flex items-baseline"><span>Email:</span> <span class="form-line w-[150px]"></span></div>
-                                        <div class="flex items-baseline"><span>Designation:</span> <span class="form-line w-[100px]"></span></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-bold border-b border-black pb-0.5 uppercase tracking-wide">2. Legal & Statutory Details</h4>
-                                <div class="mt-2 space-y-2">
-                                    <div class="flex items-baseline"><span>1. PAN No.:</span> <span class="form-line w-[150px]"></span> <span class="ml-2">(Attach attested copy)</span></div>
-                                    <div class="flex items-baseline"><span>2. GST No.:</span> <span class="form-line w-[150px]"></span> <span class="ml-2">(Attach attested copy)</span></div>
-                                    <div class="flex items-baseline"><span>3. Reg No.:</span> <span class="form-line w-[150px]"></span> <span class="ml-2">4. Date:</span> <span class="form-line w-[100px]"></span></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-bold border-b border-black pb-0.5 uppercase tracking-wide">3. Banking & Financial Details</h4>
-                                <div class="mt-2 space-y-2">
-                                    <div class="flex items-baseline"><span>1. Bank:</span> <span class="form-line w-[150px]"></span> <span>Branch:</span> <span class="form-line w-[150px]"></span></div>
-                                    <div class="flex items-baseline"><span>2. A/C No:</span> <span class="form-line w-[150px]"></span> <span>IFSC:</span> <span class="form-line w-[150px]"></span></div>
-                                    <div class="flex items-center gap-4">
-                                        <span>3. Solvency Attached:</span>
-                                        <span><div class="checkbox-custom"></div> Yes <div class="checkbox-custom"></div> No</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 class="font-bold border-b border-black pb-0.5 uppercase tracking-wide">4. Mandatory Enclosures Checklist</h4>
-                                <div class="grid grid-cols-2 gap-x-10 gap-y-1 mt-2 text-[10px]">
-                                    <span><div class="checkbox-custom"></div> PAN Card</span> <span><div class="checkbox-custom"></div> GST Reg Certificate</span>
-                                    <span><div class="checkbox-custom"></div> Address Proof</span> <span><div class="checkbox-custom"></div> Bank KYC / Cheque</span>
-                                    <span><div class="checkbox-custom"></div> Solvency Proof</span> <span><div class="checkbox-custom"></div> EMD Instrument Copy</span>
-                                </div>
-                            </div>
-
-                            <div class="mt-8 pt-4 border-t border-black">
-                                <div class="grid grid-cols-2 gap-10">
-                                    <div class="space-y-2">
-                                        <p>Place: <span class="form-line w-[120px]"></span></p>
-                                        <p>Date: <span class="form-line w-[120px]"></span></p>
-                                    </div>
-                                    <div class="text-right space-y-6">
-                                        <p>_________________________________________</p>
-                                        <p class="font-bold uppercase">Signature of Applicant</p>
-                                        <p>Name: <span class="form-line w-[200px]"></span></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-4 border-2 border-black p-3 text-[9px] grid grid-cols-2 gap-4 bg-zinc-50 italic">
-                                <div class="space-y-1">
-                                    <p class="font-bold not-italic underline">FOR OFFICE USE ONLY</p>
-                                    <p>App No: <span class="form-line w-[100px]"></span> Date: <span class="form-line w-[100px]"></span></p>
-                                    <p>Verified By: <span class="form-line w-[100px]"></span> Eligible: [ ] Yes [ ] No</p>
-                                </div>
-                                <div class="text-right flex flex-col justify-end">
-                                    <p class="font-bold not-italic">Authorized Signatory</p>
-                                    <p class="font-bold">SAM-SLNSD</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="lang-selection" class="hidden bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 border-t-4 border-[#800000] text-center">
+            <h3 class="text-sm font-bold text-zinc-800 uppercase mb-4">Select to Download</h3>
+            <div id="doc-options" class="flex flex-col gap-3">
+                <button id="dl-tel-btn" onclick="triggerDownload('tel')" class="bg-zinc-100 text-[#800000] font-bold py-3 rounded-lg border border-[#800000] uppercase text-[10px] hover:bg-[#800000] hover:text-white transition">Download Telugu Document</button>
+                <button id="dl-eng-btn" onclick="triggerDownload('eng')" class="bg-[#800000] text-white font-bold py-3 rounded-lg uppercase text-[10px] hover:bg-black transition">Download English Document</button>
             </div>
-
-            <div class="bg-zinc-100 p-4 border-t flex flex-col sm:flex-row gap-4 justify-center no-print">
-                <button onclick="handleDownload()" class="bg-black text-white px-10 py-3 rounded-lg font-bold uppercase text-[10px] hover:bg-zinc-800 flex items-center gap-2 shadow-sm">
-                    <i data-lucide="download" class="w-4 h-4"></i> Download Now
-                </button>
-                <button onclick="closeModal('doc-view-modal')" class="bg-red-900 text-white px-10 py-3 rounded-lg font-bold uppercase text-[10px] hover:bg-red-800 flex items-center gap-2 shadow-sm">
-                    <i data-lucide="x" class="w-4 h-4"></i> Close
-                </button>
+            <div id="app-options" class="hidden flex flex-col gap-3">
+                <button id="dl-app-btn" onclick="triggerDownload('app')" class="bg-[#800000] text-white font-bold py-3 rounded-lg uppercase text-[10px] hover:bg-black transition">Download Application Form</button>
             </div>
+            <button onclick="closeModal('user-info-modal')" class="mt-4 text-[9px] text-zinc-400 font-bold uppercase">Back</button>
         </div>
     </div>
 
-    <!-- FOOTER SECTION -->
-    <footer class="footer-bg text-white border-t-2 border-yellow-600 no-print">
+    <footer class="footer-bg text-white border-t-2 border-yellow-600">
         <div class="max-w-7xl mx-auto px-6 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase tracking-wider">
-                        <i data-lucide="phone-call" class="w-4 h-4"></i> Contact
-                    </h3>
+                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase"><i data-lucide="phone-call" class="w-4 h-4"></i> Contact</h3>
                     <ul class="space-y-3 text-[11px] opacity-90">
                         <li class="flex items-center gap-3"><i data-lucide="phone" class="w-3.5 h-3.5 text-yellow-500"></i> +91 94401 20878</li>
-                        <li class="flex items-center gap-3"><i data-lucide="mail" class="w-3.5 h-3.5 text-yellow-500"></i> info@ahobilamtemple.org</li>
+                        <li class="flex items-center gap-3"><i data-lucide="mail" class="w-3.5 h-3.5 text-yellow-500"></i> ca.gpa@ahobilamtemple.org</li>
                     </ul>
                 </div>
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase tracking-wider">
-                        <i data-lucide="layers" class="w-4 h-4"></i> Quick Access
-                    </h3>
+                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase"><i data-lucide="layers" class="w-4 h-4"></i> Quick Access</h3>
                     <ul class="space-y-2 text-[11px] opacity-90">
-                        <li><a href="#" class="flex items-center gap-2 hover:text-yellow-500 transition-colors"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-yellow-500"></i> Privacy Policy</a></li>
-                        <li><a href="#" class="flex items-center gap-2 hover:text-yellow-500 transition-colors"><i data-lucide="file-check-2" class="w-3.5 h-3.5 text-yellow-500"></i> Terms & Conditions</a></li>
-                        <li><a href="#" class="flex items-center gap-2 hover:text-yellow-500 transition-colors"><i data-lucide="help-circle" class="w-3.5 h-3.5 text-yellow-500"></i> FAQ / Help</a></li>
+                        <li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-yellow-500"></i> Privacy Policy</li>
+                        <li class="flex items-center gap-2"><i data-lucide="file-check-2" class="w-3.5 h-3.5 text-yellow-500"></i> Terms & Conditions</li>
+                        <li class="flex items-center gap-2"><i data-lucide="help-circle" class="w-3.5 h-3.5 text-yellow-500"></i> FAQ / Help</li>
                     </ul>
                 </div>
                 <div class="space-y-4">
-                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase tracking-wider">
-                        <i data-lucide="map-pin" class="w-4 h-4"></i> Office Address
-                    </h3>
-                    <div class="flex gap-4 opacity-90">
-                        <i data-lucide="landmark" class="w-4 h-4 text-yellow-500 shrink-0 mt-1"></i>
-                        <p class="text-[10px] md:text-[11px] leading-relaxed">
-                            <span class="font-bold block text-yellow-500 mb-1">Sri Ahobila Mutt Paramparadheena</span>
-                            Sri Lakshmi Narasimha Swamy Devastanam, Ahobilam, Nandyal (Dist), AP - 518543
-                        </p>
-                    </div>
+                    <h3 class="text-sm font-bold border-b border-yellow-800 pb-1 flex items-center gap-2 uppercase"><i data-lucide="map-pin" class="w-4 h-4"></i> Office Address</h3>
+                    <p class="text-[10px] opacity-90 leading-relaxed"><span class="font-bold block text-yellow-500 mb-1">Sri Ahobila Mutt Paramparadheena</span>Sri Lakshmi Narasimha Swamy Devastanam, Ahobilam, Nandyal (Dist), AP - 518543</p>
                 </div>
             </div>
-            <div class="mt-8 pt-4 border-t border-yellow-900 text-center">
-                <p class="text-[9px] md:text-[10px] text-yellow-600 font-medium tracking-wide">
-                    &copy; 2024 Sri Ahobila Lakshmi Narasimha Swamy Devasthanam. All Rights Reserved.
-                </p>
-            </div>
+            <div class="mt-8 pt-4 border-t border-yellow-900 text-center"><p class="text-[9px] text-yellow-600 font-medium tracking-wide">© 2024 Sri Ahobila Lakshmi Narasimha Swamy Devasthanam. All Rights Reserved.</p></div>
         </div>
     </footer>
 
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyU3FPxEyn5C5eWkmTp6COS2uDu22YUfz8attu8XW7DFesg77EM6zMKwzD65kZukQt2eQ/exec";
-        let currentDocType = '';
-        let languages = {
-            tel: { doc: 'డాక్యుమెంట్ డౌన్‌లోడ్', app: 'దరఖాస్తు డౌన్‌లోడ్' },
-            eng: { doc: 'Download Document', app: 'Download Application' },
-            hin: { doc: 'दस्तावेज़ डाउनलोड', app: 'आवेदन डाउनलोड' }
+        const LINKS = {
+            tel: "https://drive.google.com/uc?export=download&id=1fuBV9vK5FstnVK5wAfDwN3JkOzKh9CMp",
+            eng: "https://drive.google.com/uc?export=download&id=1kJjPF7yNAbxFt8H_NLX5qH5FX0FcuzbX",
+            app: "https://drive.google.com/uc?export=download&id=14K3xtLQwyZg-FE0EJeyUPstlChKJ6FQo"
         };
-
+        let currentType = '';
         function changeLang(l) {
-            document.querySelector('#btn-doc span').textContent = languages[l].doc;
-            document.querySelector('#btn-app span').textContent = languages[l].app;
+            const bD = document.querySelector('#btn-doc span'), bA = document.querySelector('#btn-app span');
+            if(l==='tel'){bD.textContent='డాక్యుమెంట్ డౌన్‌లోడ్';bA.textContent='దరఖాస్తు డౌన్‌లోడ్';}
+            else if(l==='hin'){bD.textContent='दस्तावेज़ डाउनलोड';bA.textContent='आवेदन डाउनलोड';}
+            else{bD.textContent='Download Document';bA.textContent='Download Application';}
         }
-
         function openVerification(type) {
-            currentDocType = type;
+            currentType = type;
+            document.getElementById('auth-form').classList.remove('hidden');
+            document.getElementById('lang-selection').classList.add('hidden');
             document.getElementById('user-info-modal').style.display = 'flex';
         }
-
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
         async function processSecureGen() {
-            const name = document.getElementById('user-name').value.trim();
-            const phone = document.getElementById('user-phone').value.trim();
-            
-            if(!name || phone.length !== 10) {
-                alert('Please enter a valid Name and 10-digit Phone Number.');
-                return;
-            }
-
-            closeModal('user-info-modal');
+            const n = document.getElementById('user-name').value.trim(), p = document.getElementById('user-phone').value.trim();
+            if(!n || p.length !== 10) { alert('Enter Name and 10-digit Phone.'); return; }
             document.getElementById('loading-overlay').style.display = 'flex';
-            const startTime = Date.now();
-
             try {
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    body: JSON.stringify({ name: name, phone: phone })
-                });
-
-                const remainingTime = Math.max(0, 5000 - (Date.now() - startTime));
-
+                fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name: n, phone: p, type: currentType }) });
                 setTimeout(() => {
                     document.getElementById('loading-overlay').style.display = 'none';
-                    document.getElementById('doc-name').textContent = name;
-                    document.getElementById('doc-phone').textContent = phone;
-                    
-                    const nameLetters = name.replace(/[^a-zA-Z]/g, '').substring(0, 2).toUpperCase();
-                    const phoneDigits = phone.slice(-2);
-                    document.getElementById('doc-id').textContent = 'AHB426' + nameLetters + phoneDigits + '01';
-
-                    document.getElementById('content-notice').classList.add('hidden');
-                    document.getElementById('content-form').classList.add('hidden');
-                    
-                    if(currentDocType === 'notice') {
-                        document.getElementById('content-notice').classList.remove('hidden');
-                    } else {
-                        document.getElementById('content-form').classList.remove('hidden');
-                    }
-
-                    document.getElementById('doc-view-modal').style.display = 'flex';
-                    lucide.createIcons();
-                }, remainingTime);
-
-            } catch (e) {
-                document.getElementById('loading-overlay').style.display = 'none';
-                alert('Error connecting to secure server.');
-            }
+                    document.getElementById('auth-form').classList.add('hidden');
+                    document.getElementById('lang-selection').classList.remove('hidden');
+                    if(currentType === 'notice') { document.getElementById('doc-options').classList.remove('hidden'); document.getElementById('app-options').classList.add('hidden'); }
+                    else { document.getElementById('doc-options').classList.add('hidden'); document.getElementById('app-options').classList.remove('hidden'); }
+                }, 1500);
+            } catch(e) { document.getElementById('loading-overlay').style.display = 'none'; }
         }
-
-        function handleDownload() {
-            window.print();
-            const notif = document.getElementById('download-notif');
-            notif.style.display = 'flex';
-            setTimeout(() => { notif.style.display = 'none'; }, 3000);
+        function triggerDownload(lang) {
+            const btn = document.getElementById(lang==='tel'?'dl-tel-btn':(lang==='eng'?'dl-eng-btn':'dl-app-btn'));
+            const originalText = btn.textContent;
+            btn.innerHTML = `<span class="flex items-center justify-center gap-2"><div class="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Loading...</span>`;
+            btn.disabled = true;
+            setTimeout(() => {
+                window.location.href = LINKS[lang];
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                const notif = document.getElementById('download-notif');
+                notif.style.display = 'flex';
+                setTimeout(() => { notif.style.display = 'none'; closeModal('user-info-modal'); }, 2000);
+            }, 3000);
         }
-
-        window.onload = function() { 
-            lucide.createIcons(); 
-        }
+        window.onload = function() { lucide.createIcons(); }
     </script>
 </body>
 </html>
